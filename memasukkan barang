@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    char nama[50];
+    float harga;
+    int jumlah;
+} Barang;
+
+int main() {
+    Barang barang[100];
+    int jumlahBarang = 0;
+    char pilihan;
+    float totalHarga = 0;
+
+    printf("=== Program Kasir Sederhana ===\n");
+
+    do {
+        printf("\nMasukkan data barang ke-%d:\n", jumlahBarang + 1);
+
+        printf("Nama barang: ");
+        scanf(" %[^\n]s", barang[jumlahBarang].nama);
+
+        printf("Harga barang: ");
+        scanf("%f", &barang[jumlahBarang].harga);
+
+        printf("Jumlah barang: ");
+        scanf("%d", &barang[jumlahBarang].jumlah);
+
+        totalHarga += barang[jumlahBarang].harga * barang[jumlahBarang].jumlah;
+        jumlahBarang++;
+
+        printf("\nApakah Anda ingin menambah barang lagi? (y/n): ");
+        scanf(" %c", &pilihan);
+    } while (pilihan == 'y' || pilihan == 'Y');
+
+    printf("\n=== Daftar Barang ===\n");
+    printf("%-3s %-20s %-10s %-10s %-10s\n", "No", "Nama Barang", "Harga", "Jumlah", "Total");
+    printf("---------------------------------------------------------\n");
+    for (int i = 0; i < jumlahBarang; i++) {
+        printf("%-3d %-20s %-10.2f %-10d %-10.2f\n", 
+            i + 1, 
+            barang[i].nama, 
+            barang[i].harga, 
+            barang[i].jumlah, 
+            barang[i].harga * barang[i].jumlah);
+    }
+
+    printf("---------------------------------------------------------\n");
+    printf("Total Harga: %.2f\n", totalHarga);
+    return 0;
+}
